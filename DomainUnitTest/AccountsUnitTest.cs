@@ -7,11 +7,15 @@ namespace DomainUnitTest
     [TestClass]
     public class AccountsUnitTest
     {
+        /// <summary>
+        /// AccountFactory use to be AccountBase
+        /// testAccount is now an IAccount
+        /// </summary>
         [TestMethod]
         public void CreateAccountSetsBalanceToZero()
         {
             // Arrange    
-            AccountBase testAccount = AccountBase.CreateAccount(AccountType.Silver);
+            IAccount testAccount = AccountFactory.CreateAccount(AccountType.Silver);
             // Act
             decimal balance = testAccount.Balance;
             // Assert
@@ -21,7 +25,7 @@ namespace DomainUnitTest
         public void DepositToAccountBalance()
         {
             // Arrange    
-            AccountBase testAccount = AccountBase.CreateAccount(AccountType.Silver);
+            IAccount testAccount = AccountFactory.CreateAccount(AccountType.Silver);
             // Act
             testAccount.AddTransaction(+123.45M);
             decimal balance = testAccount.Balance;
@@ -32,7 +36,7 @@ namespace DomainUnitTest
         public void WithdrawalToAccountBalance()
         {
             // Arrange    
-            AccountBase testAccount = AccountBase.CreateAccount(AccountType.Silver);
+            IAccount testAccount = AccountFactory.CreateAccount(AccountType.Silver);
             // Act
             testAccount.AddTransaction(+200M);
             testAccount.AddTransaction(-100M);
@@ -44,7 +48,7 @@ namespace DomainUnitTest
         public void NegativeBalanceAllowed()
         {
             // Arrange    
-            AccountBase testAccount = AccountBase.CreateAccount(AccountType.Silver);
+            IAccount testAccount = AccountFactory.CreateAccount(AccountType.Silver);
             // Act
             testAccount.AddTransaction(+200M);
             testAccount.AddTransaction(-500M);
@@ -60,7 +64,7 @@ namespace DomainUnitTest
         public void RewardPoints_Silver_Deposit()
         {
             // Arrange    
-            AccountBase testAccount = AccountBase.CreateAccount(AccountType.Silver);
+            IAccount testAccount = AccountFactory.CreateAccount(AccountType.Silver);
             // Act
             testAccount.AddTransaction(1000M);
             testAccount.AddTransaction(1000M);
@@ -72,7 +76,7 @@ namespace DomainUnitTest
         public void RewardPoints_Silver_Withdrawal()
         {
             // Arrange    
-            AccountBase testAccount = AccountBase.CreateAccount(AccountType.Silver);
+            IAccount testAccount = AccountFactory.CreateAccount(AccountType.Silver);
             // Act
             testAccount.AddTransaction(1000M);
             testAccount.AddTransaction(1000M);
@@ -85,7 +89,7 @@ namespace DomainUnitTest
         public void RewardPoint_Gold_Deposit()
         {
             // Arrange    
-            AccountBase testAccount = AccountBase.CreateAccount(AccountType.Gold);
+            IAccount testAccount = AccountFactory.CreateAccount(AccountType.Gold);
             // Act
             testAccount.AddTransaction(4000M);
             testAccount.AddTransaction(4000M);
@@ -97,7 +101,7 @@ namespace DomainUnitTest
         public void RewardPoints_Gold_Withdrawal()
         {
             // Arrange    
-            AccountBase testAccount = AccountBase.CreateAccount(AccountType.Gold);
+            IAccount testAccount = AccountFactory.CreateAccount(AccountType.Gold);
             // Act
             testAccount.AddTransaction(4000M);
             testAccount.AddTransaction(4000M);
@@ -110,7 +114,7 @@ namespace DomainUnitTest
         public void RewardPoints_Platinum_Deposit()
         {
             // Arrange    
-            AccountBase testAccount = AccountBase.CreateAccount(AccountType.Platinum);
+            IAccount testAccount = AccountFactory.CreateAccount(AccountType.Platinum);
             // Act
             testAccount.AddTransaction(4000M);
             testAccount.AddTransaction(4000M);
@@ -122,7 +126,7 @@ namespace DomainUnitTest
         public void RewardPoints_Platinum_Withdrawal()
         {
             // Arrange    
-            AccountBase testAccount = AccountBase.CreateAccount(AccountType.Platinum);
+            IAccount testAccount = AccountFactory.CreateAccount(AccountType.Platinum);
             // Act
             testAccount.AddTransaction(4000M);
             testAccount.AddTransaction(4000M);

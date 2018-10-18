@@ -41,6 +41,8 @@
             this.btnWithDrawal = new System.Windows.Forms.Button();
             this.txtWithdrawalAmount = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.txtBox_RewardPts = new System.Windows.Forms.TextBox();
+            this.lbl_RewardPts = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtAccountName
@@ -118,6 +120,7 @@
             this.btnDeposit.TabIndex = 8;
             this.btnDeposit.Text = "Deposit";
             this.btnDeposit.UseVisualStyleBackColor = true;
+            this.btnDeposit.Click += new System.EventHandler(this.btnDeposit_Click);
             // 
             // label4
             // 
@@ -136,6 +139,7 @@
             this.btnWithDrawal.TabIndex = 10;
             this.btnWithDrawal.Text = "Withdrawal";
             this.btnWithDrawal.UseVisualStyleBackColor = true;
+            this.btnWithDrawal.Click += new System.EventHandler(this.btnWithDrawal_Click);
             // 
             // txtWithdrawalAmount
             // 
@@ -154,11 +158,30 @@
             this.label5.TabIndex = 12;
             this.label5.Text = "Wells Fargo Account Creator";
             // 
+            // txtBox_RewardPts
+            // 
+            this.txtBox_RewardPts.Location = new System.Drawing.Point(215, 94);
+            this.txtBox_RewardPts.Name = "txtBox_RewardPts";
+            this.txtBox_RewardPts.Size = new System.Drawing.Size(100, 20);
+            this.txtBox_RewardPts.TabIndex = 13;
+            this.txtBox_RewardPts.TextChanged += new System.EventHandler(this.txtBox_RewardPts_TextChanged);
+            // 
+            // lbl_RewardPts
+            // 
+            this.lbl_RewardPts.AutoSize = true;
+            this.lbl_RewardPts.Location = new System.Drawing.Point(215, 74);
+            this.lbl_RewardPts.Name = "lbl_RewardPts";
+            this.lbl_RewardPts.Size = new System.Drawing.Size(76, 13);
+            this.lbl_RewardPts.TabIndex = 14;
+            this.lbl_RewardPts.Text = "Reward Points";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(596, 385);
+            this.Controls.Add(this.lbl_RewardPts);
+            this.Controls.Add(this.txtBox_RewardPts);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtWithdrawalAmount);
             this.Controls.Add(this.btnWithDrawal);
@@ -174,6 +197,7 @@
             this.Controls.Add(this.txtAccountName);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -194,6 +218,8 @@
         private System.Windows.Forms.Button btnWithDrawal;
         private System.Windows.Forms.TextBox txtWithdrawalAmount;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtBox_RewardPts;
+        private System.Windows.Forms.Label lbl_RewardPts;
     }
 }
 
