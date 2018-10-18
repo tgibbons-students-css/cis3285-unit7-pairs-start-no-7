@@ -36,12 +36,18 @@ namespace Domain
 
         private const int SilverTransactionCostPerPoint = 10;
 
+        /// <summary>
+        /// replace the balance method found in AccountBase
+        /// </summary>
         public decimal Balance
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// replaces the rewardPoints method found in AccountBase
+        /// </summary>
         public int RewardPoints
         {
             get;

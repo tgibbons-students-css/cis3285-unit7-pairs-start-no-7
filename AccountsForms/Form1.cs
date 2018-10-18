@@ -51,22 +51,36 @@ namespace AccountsForms
 
         private void btnDeposit_Click(object sender, EventArgs e)
         {
+            // this will get the account name found on the form
+            String accountName = listBoxAccounts.GetItemText(listBoxAccounts.SelectedItem);
+
+            // getting balance and deposti amount from form and then display the new balance on the form
             Decimal balance = Decimal.Parse(txtBalance.Text);
             Decimal deposit = Decimal.Parse(txtDepositAmount.Text);
             txtBalance.Text = (balance + deposit).ToString();
 
-            String accountName = listBoxAccounts.GetItemText(listBoxAccounts.SelectedItem);
-            txtBox_RewardPts.Text = accountName;
+            // this changes the deposit amount in the database, not the form
+            accService.Deposit(accountName, deposit);
+            
+            // get the reward points from the DB and displays it on the form
+            decimal points = accService.GetRewardPoints(accountName);
+            txtBox_RewardPts.Text = points.ToString();
         }
 
         private void btnWithDrawal_Click(object sender, EventArgs e)
         {
+            // this will get the account name found on the form
+            String accountName = listBoxAccounts.GetItemText(listBoxAccounts.SelectedItem);
             Decimal balance = Decimal.Parse(txtBalance.Text);
             Decimal withdrawal = Decimal.Parse(txtWithdrawalAmount.Text);
             txtBalance.Text = (balance - withdrawal).ToString();
 
-            String accountName = listBoxAccounts.GetItemText(listBoxAccounts.SelectedItem);
-            txtBox_RewardPts.Text = accountName;
+            // this changes the deposit amount in the database, not the form
+            accService.Withdrawal(accountName, withdrawal);
+
+            // get the reward points from the DB and displays it on the form
+            decimal points = accService.GetRewardPoints(accountName);
+            txtBox_RewardPts.Text = points.ToString();
         }
 
         private void txtBox_RewardPts_TextChanged(object sender, EventArgs e)

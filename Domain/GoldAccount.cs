@@ -37,6 +37,9 @@ namespace Domain
         private const int GoldTransactionCostPerPoint = 5;
         private const int GoldBalanceCostPerPoint = 2000;
 
+        /// <summary>
+        /// replaces the balance found in AccountBase
+        /// </summary>
         public decimal Balance
         {
             get;
@@ -44,6 +47,9 @@ namespace Domain
             set;
         }
 
+        /// <summary>
+        /// replaces the reward points found in AccountBase
+        /// </summary>
         public int RewardPoints
         {
             get;
