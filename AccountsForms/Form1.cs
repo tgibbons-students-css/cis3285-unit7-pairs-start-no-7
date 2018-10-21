@@ -87,5 +87,10 @@ namespace AccountsForms
         {
 
         }
+
+        private void txtBalance_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

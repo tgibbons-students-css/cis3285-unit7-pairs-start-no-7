@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="AccountService.cs" />
     <Compile Include="IAccountServices.cs" />
+    <Compile Include="NullAccount.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceException.cs" />
   </ItemGroup>

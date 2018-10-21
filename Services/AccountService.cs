@@ -76,13 +76,22 @@ namespace Services
         /// </summary>
         /// <param name="accountName"></param>
         /// <returns>returns null if name not found</returns>
+        /// 
+        /// Refactor the code to implement the null object pattern 
+        /// with accounts so that AccountServices:FindAccount() returns 
+        /// a null account if one is not found. You will have to define 
+        /// a new NullAccount class that implements the IAccount interface.
         private IAccount FindAccount(string accountName)
         {
             if (accountsDictionary.ContainsKey(accountName))
             {
                 return accountsDictionary[accountName];
             }
-            return null;
+            else
+            {
+                return new NullAccount();
+            }
+            
         }
 
     }
