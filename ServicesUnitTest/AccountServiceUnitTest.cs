@@ -51,6 +51,23 @@ namespace ServicesUnitTest
             Assert.AreEqual(balance, 75M);
         }
 
+        // created so that negative withdrawals (or deposits) are not allowed, user has to 
+        // use deposit button for deposits.
+        [TestMethod]
+        public void NegativeWithdrawalDoesNotRemovesFundsFromAccountBalance()
+        {
+            // Arrange    
+            AccountService acctService = new AccountService();
+            // Act
+            string accountName = "Test2";
+            acctService.CreateAccount(accountName, AccountType.Silver);
+            acctService.Deposit(accountName, 100M);
+            acctService.Withdrawal(accountName, -25M);
+            decimal balance = acctService.GetAccountBalance(accountName);
+            // Assert
+            Assert.AreEqual(balance, 100M);
+        }
+
         [TestMethod]
         public void WithdrawalCanCreateNegativeBalance()
         {

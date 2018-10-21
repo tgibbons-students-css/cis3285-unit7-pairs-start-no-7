@@ -27,12 +27,28 @@ namespace Domain
         /// the account. Withdrawals will have negative amount
         /// </summary>
         /// <param name="amount"></param>
-        public void AddTransaction(decimal amount)
+        public void AddTransaction(decimal amount, String typeOfTransaction)
         {
+            /*
             // only award reward points on deposit
             if (amount > 0) RewardPoints += CalculateRewardPoints(amount);
             // always update balance
             Balance += amount;
+            */
+            if (Equals(typeOfTransaction, "deposit"))
+            {
+                if (amount > 0)
+                {
+                    RewardPoints += CalculateRewardPoints(amount);
+                    // always update balance
+                    Balance += amount;
+                }
+            }
+            else if (Equals(typeOfTransaction, "withdrawal"))
+            {
+
+                Balance += amount;
+            }
         }
 
         private const int PlatinumTransactionCostPerPoint = 2;

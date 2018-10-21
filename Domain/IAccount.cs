@@ -15,7 +15,7 @@ namespace Domain
         int RewardPoints { get; set; }
 
         // removed public
-        void AddTransaction(decimal amount);
+        void AddTransaction(decimal amount, String typeOfTranscation);
 
         ///remove public abstract from the declaration
         /// <summary>

@@ -27,8 +27,21 @@ namespace AccountsForms
         private void btnAddAccount_Click(object sender, EventArgs e)
         {
             string accountName = txtAccountName.Text;
+            string accType = listBox_AcctType.SelectedItem.ToString();
             listBoxAccounts.Items.Add(accountName);
-            accService.CreateAccount(accountName, AccountType.Silver);
+
+            if (accType == "Platinum"){
+                accService.CreateAccount(accountName, AccountType.Platinum);
+            }
+            else if(accType == "Gold")
+            {
+                accService.CreateAccount(accountName, AccountType.Gold);
+            }
+            else
+            {
+                accService.CreateAccount(accountName, AccountType.Silver);
+            }
+            
         }
         /// <summary>
         /// Account listbox item selected
@@ -40,8 +53,9 @@ namespace AccountsForms
         {
             string accName = listBoxAccounts.SelectedItem.ToString();
             decimal balance = accService.GetAccountBalance(accName);
-
+            decimal rewards = accService.GetRewardPoints(accName);
             txtBalance.Text = balance.ToString();
+            txtBox_RewardPts.Text = rewards.ToString();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -57,14 +71,25 @@ namespace AccountsForms
             // getting balance and deposti amount from form and then display the new balance on the form
             Decimal balance = Decimal.Parse(txtBalance.Text);
             Decimal deposit = Decimal.Parse(txtDepositAmount.Text);
-            txtBalance.Text = (balance + deposit).ToString();
+            // if the deposit amount is negative, display a alert letting the user know that it is not allowed,
+            // the balance and reward should not change 
+            if(deposit < 0)
+            {
+                MessageBox.Show("You cannot make a negative deposit, please use the withdrawl button to do this transcation.");
 
-            // this changes the deposit amount in the database, not the form
-            accService.Deposit(accountName, deposit);
-            
-            // get the reward points from the DB and displays it on the form
-            decimal points = accService.GetRewardPoints(accountName);
-            txtBox_RewardPts.Text = points.ToString();
+            }
+            else
+            {
+                txtBalance.Text = (balance + deposit).ToString();
+
+                // this changes the deposit amount in the database, not the form
+                accService.Deposit(accountName, deposit);
+
+                // get the reward points from the DB and displays it on the form
+                decimal points = accService.GetRewardPoints(accountName);
+                txtBox_RewardPts.Text = points.ToString();
+            }
+
         }
 
         private void btnWithDrawal_Click(object sender, EventArgs e)
@@ -73,14 +98,26 @@ namespace AccountsForms
             String accountName = listBoxAccounts.GetItemText(listBoxAccounts.SelectedItem);
             Decimal balance = Decimal.Parse(txtBalance.Text);
             Decimal withdrawal = Decimal.Parse(txtWithdrawalAmount.Text);
-            txtBalance.Text = (balance - withdrawal).ToString();
 
-            // this changes the deposit amount in the database, not the form
-            accService.Withdrawal(accountName, withdrawal);
+            if(withdrawal > 0)
+            {
+                txtBalance.Text = (balance - withdrawal).ToString();
 
-            // get the reward points from the DB and displays it on the form
-            decimal points = accService.GetRewardPoints(accountName);
-            txtBox_RewardPts.Text = points.ToString();
+                // this changes the deposit amount in the database, not the form
+                accService.Withdrawal(accountName, withdrawal);
+
+                // get the reward points from the DB and displays it on the form
+                decimal points = accService.GetRewardPoints(accountName);
+                txtBox_RewardPts.Text = points.ToString();
+            }
+            else
+            {
+                MessageBox.Show("You cannot make a negative withdrawal, this is also consider a deposit. " +
+                    "If you want to make a deposit please use the deposit button. " +
+                    "If you meant to make a withdrawl enter the amount without the negative sign.");
+            }
+
+            
         }
 
         private void txtBox_RewardPts_TextChanged(object sender, EventArgs e)
@@ -89,6 +126,16 @@ namespace AccountsForms
         }
 
         private void txtBalance_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
         {
 
         }

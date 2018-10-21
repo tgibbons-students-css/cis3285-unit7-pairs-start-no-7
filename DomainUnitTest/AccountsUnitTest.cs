@@ -12,7 +12,7 @@ namespace DomainUnitTest
         /// testAccount is now an IAccount
         /// </summary>
         [TestMethod]
-        public void CreateAccountSetsBalanceToZero()
+        public void CreateSilverAccountSetsBalanceToZero()
         {
             // Arrange    
             IAccount testAccount = AccountFactory.CreateAccount(AccountType.Silver);
@@ -22,15 +22,85 @@ namespace DomainUnitTest
             Assert.AreEqual(balance, 0.00M);
         }
         [TestMethod]
-        public void DepositToAccountBalance()
+        public void DepositToSilverAccountBalance()
         {
             // Arrange    
             IAccount testAccount = AccountFactory.CreateAccount(AccountType.Silver);
             // Act
-            testAccount.AddTransaction(+123.45M);
+            testAccount.AddTransaction(+123.45M, "deposit");
             decimal balance = testAccount.Balance;
             // Assert
             Assert.AreEqual(balance, +123.45M);
+        }
+        /// <summary>
+        /// Created to test Gold Account creation, did not fail when I first created
+        /// </summary>
+        [TestMethod]
+        public void CreateGoldAccountSetsBalanceToZero()
+        {
+            // Arrange    
+            IAccount testAccount = AccountFactory.CreateAccount(AccountType.Gold);
+            // Act
+            decimal balance = testAccount.Balance;
+            // Assert
+            Assert.AreEqual(balance, 0.00M);
+        }
+        /// <summary>
+        /// Created to test deposit into Gold account, did not fail when I first created it. 
+        /// </summary>
+        [TestMethod]
+        public void DepositToGoldAccountBalance()
+        {
+            // Arrange    
+            IAccount testAccount = AccountFactory.CreateAccount(AccountType.Gold);
+            // Act
+            testAccount.AddTransaction(+123.45M, "deposit");
+            decimal balance = testAccount.Balance;
+            // Assert
+            Assert.AreEqual(balance, +123.45M);
+        }
+        /// <summary>
+        /// Created to test Platinum account, did not fail when I first created it
+        /// </summary>
+        [TestMethod]
+        public void CreatePlatinumAccountSetsBalanceToZero()
+        {
+            // Arrange    
+            IAccount testAccount = AccountFactory.CreateAccount(AccountType.Platinum);
+            // Act
+            decimal balance = testAccount.Balance;
+            // Assert
+            Assert.AreEqual(balance, 0.00M);
+        }
+        /// <summary>
+        /// Created to test Platinum account, did not fail when I first created it.
+        /// </summary>
+        [TestMethod]
+        public void DepositToPlatinumAccountBalance()
+        {
+            // Arrange    
+            IAccount testAccount = AccountFactory.CreateAccount(AccountType.Platinum);
+            // Act
+            testAccount.AddTransaction(+123.45M, "deposit");
+            decimal balance = testAccount.Balance;
+            // Assert
+            Assert.AreEqual(balance, +123.45M);
+        }
+        // testing for negative deposit
+        /// <summary>
+        /// made changes to the AddTransaction method, it now takes in a second parameter
+        /// the type of transaction (withdrawal/deposit) and will check this in the account class
+        /// </summary>
+        [TestMethod]
+        public void NegativeDepositToAccountBalance()
+        {
+            // Arrange    
+            IAccount testAccount = AccountFactory.CreateAccount(AccountType.Silver);
+            // Act
+            testAccount.AddTransaction(-123.45M, "deposit");
+            decimal balance = testAccount.Balance;
+            // Assert
+            Assert.AreEqual(balance, 0);
         }
         [TestMethod]
         public void WithdrawalToAccountBalance()
@@ -38,20 +108,23 @@ namespace DomainUnitTest
             // Arrange    
             IAccount testAccount = AccountFactory.CreateAccount(AccountType.Silver);
             // Act
-            testAccount.AddTransaction(+200M);
-            testAccount.AddTransaction(-100M);
+            testAccount.AddTransaction(+200M, "deposit");
+            testAccount.AddTransaction(-100M, "withdrawal");
             decimal balance = testAccount.Balance;
             // Assert
             Assert.AreEqual(balance, +100M);
         }
+
+
+
         [TestMethod]
         public void NegativeBalanceAllowed()
         {
             // Arrange    
             IAccount testAccount = AccountFactory.CreateAccount(AccountType.Silver);
             // Act
-            testAccount.AddTransaction(+200M);
-            testAccount.AddTransaction(-500M);
+            testAccount.AddTransaction(+200M, "deposit");
+            testAccount.AddTransaction(-500M, "withdrawal");
             decimal balance = testAccount.Balance;
             // Assert
             Assert.AreEqual(balance, -300M);
@@ -66,8 +139,8 @@ namespace DomainUnitTest
             // Arrange    
             IAccount testAccount = AccountFactory.CreateAccount(AccountType.Silver);
             // Act
-            testAccount.AddTransaction(1000M);
-            testAccount.AddTransaction(1000M);
+            testAccount.AddTransaction(1000M, "deposit");
+            testAccount.AddTransaction(1000M, "deposit");
             int points = testAccount.RewardPoints;
             // Assert
             Assert.AreEqual(points, 200);
@@ -78,9 +151,9 @@ namespace DomainUnitTest
             // Arrange    
             IAccount testAccount = AccountFactory.CreateAccount(AccountType.Silver);
             // Act
-            testAccount.AddTransaction(1000M);
-            testAccount.AddTransaction(1000M);
-            testAccount.AddTransaction(-1000M);
+            testAccount.AddTransaction(1000M, "deposit");
+            testAccount.AddTransaction(1000M, "deposit");
+            testAccount.AddTransaction(-1000M, "withdrawal");
             int points = testAccount.RewardPoints;
             // Assert
             Assert.AreEqual(points, 200);
@@ -91,8 +164,8 @@ namespace DomainUnitTest
             // Arrange    
             IAccount testAccount = AccountFactory.CreateAccount(AccountType.Gold);
             // Act
-            testAccount.AddTransaction(4000M);
-            testAccount.AddTransaction(4000M);
+            testAccount.AddTransaction(4000M, "deposit");
+            testAccount.AddTransaction(4000M, "deposit");
             int points = testAccount.RewardPoints;
             // Assert
             Assert.AreEqual(points, 800 + 2 + 800);
@@ -103,9 +176,9 @@ namespace DomainUnitTest
             // Arrange    
             IAccount testAccount = AccountFactory.CreateAccount(AccountType.Gold);
             // Act
-            testAccount.AddTransaction(4000M);
-            testAccount.AddTransaction(4000M);
-            testAccount.AddTransaction(-1000M);
+            testAccount.AddTransaction(4000M, "deposit");
+            testAccount.AddTransaction(4000M, "deposit");
+            testAccount.AddTransaction(-1000M, "withdrawal");
             int points = testAccount.RewardPoints;
             // Assert
             Assert.AreEqual(points, 800 + 2 + 800);
@@ -116,8 +189,8 @@ namespace DomainUnitTest
             // Arrange    
             IAccount testAccount = AccountFactory.CreateAccount(AccountType.Platinum);
             // Act
-            testAccount.AddTransaction(4000M);
-            testAccount.AddTransaction(4000M);
+            testAccount.AddTransaction(4000M, "deposit");
+            testAccount.AddTransaction(4000M, "deposit");
             int points = testAccount.RewardPoints;
             // Assert
             Assert.AreEqual(points, 2000 + 4 + 2000);
@@ -128,9 +201,9 @@ namespace DomainUnitTest
             // Arrange    
             IAccount testAccount = AccountFactory.CreateAccount(AccountType.Platinum);
             // Act
-            testAccount.AddTransaction(4000M);
-            testAccount.AddTransaction(4000M);
-            testAccount.AddTransaction(-1000M);
+            testAccount.AddTransaction(4000M, "deposit");
+            testAccount.AddTransaction(4000M, "deposit");
+            testAccount.AddTransaction(-1000M, "withdrawal");
             int points = testAccount.RewardPoints;
             // Assert
             Assert.AreEqual(points, 2000 + 4 + 2000);

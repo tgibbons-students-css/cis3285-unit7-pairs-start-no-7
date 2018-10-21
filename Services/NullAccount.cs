@@ -12,7 +12,7 @@ namespace Services
         public decimal Balance { get; set; }
         public int RewardPoints { get; set; }
 
-        public void AddTransaction(decimal amount)
+        public void AddTransaction(decimal amount, string typeOfTranscation)
         {
             
         }

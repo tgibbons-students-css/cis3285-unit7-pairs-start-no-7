@@ -43,6 +43,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtBox_RewardPts = new System.Windows.Forms.TextBox();
             this.lbl_RewardPts = new System.Windows.Forms.Label();
+            this.listBox_AcctType = new System.Windows.Forms.ListBox();
+            this.lbl_AcctType = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtAccountName
@@ -54,7 +56,7 @@
             // 
             // btnAddAccount
             // 
-            this.btnAddAccount.Location = new System.Drawing.Point(53, 91);
+            this.btnAddAccount.Location = new System.Drawing.Point(52, 145);
             this.btnAddAccount.Name = "btnAddAccount";
             this.btnAddAccount.Size = new System.Drawing.Size(100, 23);
             this.btnAddAccount.TabIndex = 1;
@@ -65,7 +67,7 @@
             // listBoxAccounts
             // 
             this.listBoxAccounts.FormattingEnabled = true;
-            this.listBoxAccounts.Location = new System.Drawing.Point(52, 164);
+            this.listBoxAccounts.Location = new System.Drawing.Point(52, 212);
             this.listBoxAccounts.Name = "listBoxAccounts";
             this.listBoxAccounts.Size = new System.Drawing.Size(137, 147);
             this.listBoxAccounts.TabIndex = 2;
@@ -83,7 +85,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(49, 148);
+            this.label2.Location = new System.Drawing.Point(49, 196);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(89, 13);
             this.label2.TabIndex = 4;
@@ -91,7 +93,7 @@
             // 
             // txtBalance
             // 
-            this.txtBalance.Location = new System.Drawing.Point(338, 93);
+            this.txtBalance.Location = new System.Drawing.Point(378, 76);
             this.txtBalance.Name = "txtBalance";
             this.txtBalance.Size = new System.Drawing.Size(100, 20);
             this.txtBalance.TabIndex = 5;
@@ -100,7 +102,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(338, 74);
+            this.label3.Location = new System.Drawing.Point(378, 57);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(89, 13);
             this.label3.TabIndex = 6;
@@ -108,7 +110,7 @@
             // 
             // txtDepositAmount
             // 
-            this.txtDepositAmount.Location = new System.Drawing.Point(341, 184);
+            this.txtDepositAmount.Location = new System.Drawing.Point(344, 184);
             this.txtDepositAmount.Name = "txtDepositAmount";
             this.txtDepositAmount.Size = new System.Drawing.Size(100, 20);
             this.txtDepositAmount.TabIndex = 7;
@@ -126,7 +128,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(341, 165);
+            this.label4.Location = new System.Drawing.Point(341, 168);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(43, 13);
             this.label4.TabIndex = 9;
@@ -161,7 +163,7 @@
             // 
             // txtBox_RewardPts
             // 
-            this.txtBox_RewardPts.Location = new System.Drawing.Point(215, 94);
+            this.txtBox_RewardPts.Location = new System.Drawing.Point(255, 77);
             this.txtBox_RewardPts.Name = "txtBox_RewardPts";
             this.txtBox_RewardPts.Size = new System.Drawing.Size(100, 20);
             this.txtBox_RewardPts.TabIndex = 13;
@@ -170,17 +172,42 @@
             // lbl_RewardPts
             // 
             this.lbl_RewardPts.AutoSize = true;
-            this.lbl_RewardPts.Location = new System.Drawing.Point(215, 74);
+            this.lbl_RewardPts.Location = new System.Drawing.Point(255, 57);
             this.lbl_RewardPts.Name = "lbl_RewardPts";
             this.lbl_RewardPts.Size = new System.Drawing.Size(76, 13);
             this.lbl_RewardPts.TabIndex = 14;
             this.lbl_RewardPts.Text = "Reward Points";
             // 
+            // listBox_AcctType
+            // 
+            this.listBox_AcctType.FormattingEnabled = true;
+            this.listBox_AcctType.Items.AddRange(new object[] {
+            "Silver",
+            "Gold",
+            "Platinum"});
+            this.listBox_AcctType.Location = new System.Drawing.Point(52, 96);
+            this.listBox_AcctType.Name = "listBox_AcctType";
+            this.listBox_AcctType.Size = new System.Drawing.Size(120, 43);
+            this.listBox_AcctType.TabIndex = 15;
+            this.listBox_AcctType.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            // 
+            // lbl_AcctType
+            // 
+            this.lbl_AcctType.AutoSize = true;
+            this.lbl_AcctType.Location = new System.Drawing.Point(49, 80);
+            this.lbl_AcctType.Name = "lbl_AcctType";
+            this.lbl_AcctType.Size = new System.Drawing.Size(122, 13);
+            this.lbl_AcctType.TabIndex = 16;
+            this.lbl_AcctType.Text = "Account Type (Select 1)";
+            this.lbl_AcctType.Click += new System.EventHandler(this.label6_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(596, 385);
+            this.ClientSize = new System.Drawing.Size(529, 385);
+            this.Controls.Add(this.lbl_AcctType);
+            this.Controls.Add(this.listBox_AcctType);
             this.Controls.Add(this.lbl_RewardPts);
             this.Controls.Add(this.txtBox_RewardPts);
             this.Controls.Add(this.label5);
@@ -221,6 +248,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtBox_RewardPts;
         private System.Windows.Forms.Label lbl_RewardPts;
+        private System.Windows.Forms.ListBox listBox_AcctType;
+        private System.Windows.Forms.Label lbl_AcctType;
     }
 }
 

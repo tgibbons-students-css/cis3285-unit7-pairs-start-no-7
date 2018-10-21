@@ -57,19 +57,37 @@ namespace Services
         /// <param name="amount"></param>
         public void Deposit(string accountName, decimal amount)
         {
+            /*
+            if(amount > 0)
+            {
+                IAccount acc = FindAccount(accountName);
+                acc.AddTransaction(amount);
+            }
+            */
             IAccount acc = FindAccount(accountName);
-            acc.AddTransaction(amount);
+            acc.AddTransaction(amount, "deposit");
+
         }
         /// <summary>
         /// withdrawal the given account into the account named
+        /// 
+        /// Need to check for incoming negative amount, because it will be treated as 
+        /// as withdrawal and this should not be allowed, the user should use the deposit button
+        /// 
         /// </summary>
         /// <param name="accountName"></param>
         /// <param name="amount"></param>
         public void Withdrawal(string accountName, decimal amount)
         {
             IAccount acc = FindAccount(accountName);
-            // for withdrawal, subtract amount
-            acc.AddTransaction(-1*amount);
+            // check to make sure that the final amount isn't going to be a positive amount, because
+            // it will signfy a deposit instead of a withdrawal
+            if(amount > 0)
+            {
+                // for withdrawal, subtract amount
+                acc.AddTransaction(-1*amount, "withdrawal");
+            }
+            
         }
         /// <summary>
         /// Look up the account by name in the dictionar
