@@ -54,7 +54,7 @@ namespace ServicesUnitTest
         // created so that negative withdrawals (or deposits) are not allowed, user has to 
         // use deposit button for deposits.
         [TestMethod]
-        public void NegativeWithdrawalDoesNotRemovesFundsFromAccountBalance()
+        public void NegativeWithdrawalDoesNotAddFundsToAccountBalance()
         {
             // Arrange    
             AccountService acctService = new AccountService();
